@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SpatialLMM</title>
+        <title>SpatialLLM</title>
         <script src="template.v2.js"></script>
         <link rel="icon" href="assets/jhu.png" type="image/png" sizes="128x128">
         <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
@@ -67,22 +67,22 @@
     <body>
         <div class="header-container">
             <div class="header-content">
-              <h1>SpatialLMM: A Compound 3D-Informed Design towards Spatially-Intelligent Large Multimodal Models</h1>
+              <h1>SpatialLLM: A Compound 3D-Informed Design towards Spatially-Intelligent Large Multimodal Models</h1>
               <h3>CVPR 2025</h3>
               <p>
-                <a href="https://wufeim.github.io" target="_blank" style="text-decoration: none;">Wufei Ma<sup>1</sup></a> &emsp;
-                <a href="https://openreview.net/profile?id=~Luoxin_Ye1" target="_blank" style="text-decoration: none;">Luoxin Ye<sup>1</sup></a> &emsp;
+                <a href="https://wufeim.github.io" target="_blank" style="text-decoration: none;"><b>Wufei Ma</b><sup>1</sup></a> &emsp;
+                <a href="https://openreview.net/profile?id=~Luoxin_Ye1" target="_blank" style="text-decoration: none;"><b>Luoxin Ye</b><sup>1</sup></a> &emsp;
                 <br>
-                <a href="https://celsodemelo.net" target="_blank"  style="text-decoration: none;">Celso M de Melo<sup>2</sup></a> &emsp;
-                <a href="https://www.cs.jhu.edu/~ayuille/" target="_blank" style="text-decoration: none;">Alan Yuille<sup>1</sup></a> &emsp;
-                <a href="https://beckschen.github.io" target="_blank" style="text-decoration: none;">Jieneng Chen<sup>1</sup></a> &emsp;
+                <a href="https://celsodemelo.net" target="_blank"  style="text-decoration: none;"><b>Celso M de Melo</b><sup>2</sup></a> &emsp;
+                <a href="https://www.cs.jhu.edu/~ayuille/" target="_blank" style="text-decoration: none;"><b>Alan Yuille</b><sup>1</sup></a> &emsp;
+                <a href="https://beckschen.github.io" target="_blank" style="text-decoration: none;"><b>Jieneng Chen</b><sup>1</sup></a> &emsp;
                 <br>
                 <br>
                 <a href="https://www.jhu.edu" target="_blank" style="text-decoration: none;"><sup>1</sup>Johns Hopkins University</a> &emsp;
                 <a href="https://arl.devcom.army.mil" target="_blank" style="text-decoration: none;"><sup>2</sup>DEVCOM Army Research Laboratory</a> &emsp;
               </p>
               <div class="button-container">
-                <a href="http://arxiv.org/abs/2406.09613" class="button" target="_blank">arXiv</a>
+                <a href="#" class="button" target="_blank">arXiv (link pending)</a>
                 <!-- <a href="#" class="button" target="_blank">Code (by June)</a> -->
                 <a href="#" class="button">Code (by June)</a>
               </div>
@@ -101,18 +101,18 @@
         </d-contents>
 
         <p style="text-align: justify;">
-            We systematically study the impact of 3D-informed data, architecture, and training setups and present <b>SpatialLMM</b>, an LMM with advanced 3D spatial reasoning abilities.
+            We systematically study the impact of 3D-informed data, architecture, and training setups and present <b>SpatialLLM</b>, an LMM with advanced 3D spatial reasoning abilities.
         </p>
         <d-figure>
             <figure>
-                <img src="assets/images/3dvlm-teaser.png" alt="ImageNet3D overview" style="max-height: 360px; object-fit: contain;">
+                <img src="assets/images/3dvlm-teaser2.jpg" alt="ImageNet3D overview" style="max-height: 360px; object-fit: contain;">
                 <figcaption>
-                    <b>Figure 1.</b> Overview of our SpatialLMM framework.
+                    <b>Figure 1.</b> Overview of our SpatialLLM framework.
                 </figcaption>
             </figure>
         </d-figure>
 
-        <section id="key">
+        <!-- <section id="key">
             <h2 id="key">Key Findings</h2>
         </section>
 
@@ -528,17 +528,17 @@
             <p style="text-align: justify;">
                 <b>Ethics.</b> We follow the ethics guidelines and obtained Institutional Review Board (IRB) approvals prior to the start of our work. We described potential risks to the annotators, such as being exposed to inappropriate images from the ImageNet21k dataset <d-cite key="deng2009imagenet"></d-cite>, and explained the purpose of the study and how the collected data will be used. All annotators are paid by a fair amount as required at our institution.
             </p>
-        </section>
+        </section> -->
 
         </d-article>
         <d-appendix>
             <h3>BibTeX</h3>
             <p class="bibtex">
-                @article{ma2024imagenet3d,<br>
-                &nbsp;&nbsp;title={ImageNet3D: Towards General-Purpose Object-Level 3D Understanding},<br>
-                &nbsp;&nbsp;author={Ma, Wufei and Zeng, Guanning and Zhang, Guofeng and Liu, Qihao and Zhang, Letian and Kortylewski, Adam and Liu, Yaoyao and Yuille, Alan},<br>
-                &nbsp;&nbsp;journal={arXiv preprint arXiv:2406.09613},<br>
-                &nbsp;&nbsp;year={2024}<br>
+                @inproceedings{ma2025spatialllm,<br/>
+                &nbsp;&nbsp;title={SpatialLLM: A Compound 3D-Informed Design towards Spatially-Intelligent Large Multimodal Models},<br/>
+                &nbsp;&nbsp;author={Ma, Wufei and Ye, Luoxin and de Melo, Celso and Yuille, Alan L and Chen, Jieneng},<br/>
+                &nbsp;&nbsp;booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},<br/>
+                &nbsp;&nbsp;year={2025}<br/>
                 }
             </p>
 
