@@ -68,40 +68,38 @@
         <div class="header-container">
             <div class="header-content">
               <h1>SpatialLLM: A Compound 3D-Informed Design towards Spatially-Intelligent Large Multimodal Models</h1>
-              <h3>CVPR 2025</h3>
+              <h3>CVPR 2025 <span style="color: red;">(highlight)</span></h3>
               <p>
                 <a href="https://wufeim.github.io" target="_blank" style="text-decoration: none;"><b>Wufei Ma</b><sup>1</sup></a> &emsp;
                 <a href="https://openreview.net/profile?id=~Luoxin_Ye1" target="_blank" style="text-decoration: none;"><b>Luoxin Ye</b><sup>1</sup></a> &emsp;
                 <br>
                 <a href="https://celsodemelo.net" target="_blank"  style="text-decoration: none;"><b>Celso M de Melo</b><sup>2</sup></a> &emsp;
-                <a href="https://www.cs.jhu.edu/~ayuille/" target="_blank" style="text-decoration: none;"><b>Alan Yuille</b><sup>1</sup></a> &emsp;
                 <a href="https://beckschen.github.io" target="_blank" style="text-decoration: none;"><b>Jieneng Chen</b><sup>1</sup></a> &emsp;
-                <br>
+                <a href="https://www.cs.jhu.edu/~ayuille/" target="_blank" style="text-decoration: none;"><b>Alan Yuille</b><sup>1</sup></a>
                 <br>
                 <a href="https://www.jhu.edu" target="_blank" style="text-decoration: none;"><sup>1</sup>Johns Hopkins University</a> &emsp;
                 <a href="https://arl.devcom.army.mil" target="_blank" style="text-decoration: none;"><sup>2</sup>DEVCOM Army Research Laboratory</a> &emsp;
               </p>
               <div class="button-container">
-                <a href="#" class="button" target="_blank">arXiv (link pending)</a>
+                <a href="https://arxiv.org/abs/2505.00788" class="button" target="_blank">arXiv</a>
                 <!-- <a href="#" class="button" target="_blank">Code (by June)</a> -->
-                <a href="#" class="button">Code (by June)</a>
+                <a href="#" class="button">Data & Code</a>
               </div>
             </div>
         </div>
     <d-article>
-        <d-contents>
+        <d-contents style="margin-top: 5px;">
             <nav>
                 <h4>Contents</h4>
-                <div><a href="#key">Key Findings</a></div>
-                <div><a href="#eval">3D Spatial Reasoning</a></div>
-                <div><a href="#method">SpatialLMM</a></div>
-                <div><a href="#results">Results</a></div>
-                <div><a href="#discussion">Discussion</a></div>
+                <div><a href="#framework">Framework</a></div>
+                <div><a href="#findings">Key Findings</a></div>
+                <div><a href="#public">Data & Code</a></div>
+                <div><a href="#misc">Miscellaneous</a></div>
             </nav>
         </d-contents>
 
         <p style="text-align: justify;">
-            We systematically study the impact of 3D-informed data, architecture, and training setups and present <b>SpatialLLM</b>, an LMM with advanced 3D spatial reasoning abilities.
+            Recent 3D-aware VQA benchmarks demonstrated the limited 3D spatial reasoning abilities of multi-modal large language models. This limitation stems from the scarcity of 3D training data and the bias in current model designs toward 2D data. We systematically study the impact of 3D-informed data, architecture, and training setups and present <b>SpatialLLM</b>, a multi-modal LLM with advanced 3D spatial reasoning abilities.
         </p>
         <d-figure>
             <figure>
@@ -111,6 +109,97 @@
                 </figcaption>
             </figure>
         </d-figure>
+
+        <section id="framework">
+            <h2 id="framework">SpatialLLM Framework</h2>
+            <p style="text-align: justify;">
+                Our goal is to study the best training and data recipe that builds spatially-intelligent LLMs, which can answer challenging 3D spatial reasoning questions on 3D locations and poses of objects. Therefore, we build the <b>SpatialLLM framework</b> with various training and data setups, as well as a <b>SpatialVQA benchmark</b> for thorough evaluation.
+            </p>
+            <p style="text-align: justify;">
+                <b>Evaluation data.</b> To analyze the limitations of current multi-modal LLMs and to study the best recipe towards spatially-intelligent LLMs, we follow <d-cite key="cheng2024spatialrgpt"></d-cite> build a SpatialVQA benchmark based on 3D bounding box annotations in Omni3D <d-cite key="brazil2023omni3d"></d-cite>. Compared to previous benchmarks <d-cite key="cheng2024spatialrgpt"></d-cite>, our SpatialVQA focuses on 3D spatial reasoning questions about 3D location and pose of objects, which cannot be easily answered from 2D cues, <i>e.g.</i>, 2D bounding boxes.
+            </p>
+            <d-figure>
+                <figure>
+                    <img src="assets/images/spatialvqa.jpg" alt="ImageNet3D overview" style="max-height: 240px; object-fit: contain;">
+                    <figcaption>
+                        <b>Figure 2.</b> Evaluating 3D spatial reasoning with our SpatialVQA benchmark.
+                    </figcaption>
+                </figure>
+            </d-figure>
+            <p style="text-align: justify;">
+                <b>SpatialLLM framework.</b> We systematically study the impact of 3D-informed data, architecture, and training setups towards spatially-intelligent LLMs. Specifically, we consider the following:
+                <ul>
+                    <li><b>Training data.</b> We consider two types of training data, 3D-informed probing data and 3D-informed finetuning data. The probing data consists of basic 3D knowledge, such as depth, distance, and pose, while the finetuning data includes spatial VQAs that require certain reasoning.</li>
+                    <li><b>Architecture.</b> We study the design of visual encoder to enable better 3D spatial reasoning: (1) pretrained visual encoders, (2) mixed encoders, and (3) finetuned 3D-informed visual encoders.</li>
+                    <li><b>Training setup.</b> We extend the LLaVA framework and consider three stages of training: (1) stage 0 (pre-pretraining): use 3D-informed probing data to tune the Lora layers of CLIP vision encoder; (2) stage 1: 3D-informed multimodal alignment using a combination of standard CC558K and our 3D-informed probing data; and (3) stage 2: 3D-informed instruction tuning with the standard Mix665K and our 3D-informed visual instruction tuning data.</li>
+                </ul>
+            </p>
+            <d-figure>
+                <figure>
+                    <img src="assets/images/spatialllm.png" alt="ImageNet3D overview" style="max-height: 240px; object-fit: contain;">
+                    <figcaption>
+                        <b>Figure 3.</b> Our SpatialLLM framework.
+                    </figcaption>
+                </figure>
+            </d-figure>
+        </section>
+
+        <section id="findings">
+            <h2 id="findings">Key Findings</h2>
+            <p style="text-align: justify;">
+                <b>Our final SpatialLLM model outperforms all previous open-sourced and proprietary models on 3D spatial reasoning questions in SpatialVQA.</b>
+            </p>
+            <d-figure>
+                <figure>
+                    <img src="assets/images/benchmark.png" alt="ImageNet3D overview" style="max-height: 280px; object-fit: contain;">
+                    <figcaption>
+                        <b>Figure 4.</b> 3D spatial reasoning performance on SpatialVQA.
+                    </figcaption>
+                </figure>
+            </d-figure>
+            <p style="text-align: justify;">
+                <b>The best recipe towards sptially-intelligent LLM is a combination of 3D-informed multimodal alignment using probing data and 3D-informed visual instruction tuning on synthetic spatial VQAs. <span style="color: #F66B4D;">=> 3D awareness of visual encoder is important!</span></b>
+            </p>
+            <d-figure>
+                <figure>
+                    <img src="assets/images/performance.png" alt="ImageNet3D overview" style="max-height: 360px; object-fit: contain;">
+                    <figcaption>
+                        <b>Figure 5.</b> Ablation study results on different data and training setups.
+                    </figcaption>
+                </figure>
+            </d-figure>
+            <p style="text-align: justify;">
+                <b>Finetuning CLIP with our 3D-informed data hurts final performance -- trade-off between 3D awareness and generalization abilities.</b>
+            </p>
+        </section>
+
+        <section id="public">
+            <h2 id="public">Data & Code</h2>
+            <p style="text-align: justify;">
+                The data and code are released alongside our latest follow-up work, <a href="https://spatial-reasoner.github.io/">SpatialReasoner</a>:
+                <ul>
+                    <li>
+                        <a href="https://3dsrbench.github.io/" style="text-decoration: none; border: none;"><img src="https://img.shields.io/badge/3DSRBench-9cf" style="vertical-align: middle; border: none;"></a> A comprehensive 3D spatial reasoning benchmark with (1) 2,100 manually annotated questions on real images, and (2) 12 diverse 3D spatial reasoning question types about object height, 3D location, 3D pose, spatial relationships, etc.
+                    </li>
+                    <li>
+                        <a href="https://github.com/wufeim/SpatialReasonerDataGen" style="text-decoration: none; border: none;"><img src="https://img.shields.io/badge/GitHub-SpatialReasonerDataGen-000?logo=github&logoColor=fff" style="vertical-align: middle; border: none;"></a> Code to generate pseudo 3D groundtruths and synthetic spatial VQA, including challenging spatial reasoning questions on object 3D poses.
+                    </li>
+                    <li>
+                        <a href="https://huggingface.co/collections/ccvl/spatialreasoner-68114caec81774edbf1781d3" style="text-decoration: none; border: none;"><img src="https://img.shields.io/badge/Hugging%20Face-SpatialReasoner-FFD21E?logo=huggingface" style="vertical-align: middle; border: none;"></a> Pre-generated 3D spatial VQA training data and finetuned SpatialReasoner models.
+                    </li>
+                    <li>
+                        <a href="https://github.com/johnson111788/SpatialReasoner" style="text-decoration: none; border: none;"><img src="https://img.shields.io/badge/GitHub-SpatialReasoner-000?logo=github&logoColor=fff" style="vertical-align: middle; border: none;"></a> Recipe to finetune a Qwen2.5-VL model with SFT or RL on 3D spatial reasoning questions, which achieves state-of-the-art performance on 3DSRBench.
+                    </li>
+                </ul>
+            </p>
+        </section>
+
+        <section id="misc">
+            <h2 id="misc">Miscellaneous</h2>
+            <p style="text-align: justify;">
+                <b>License.</b> Our data and code are released under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> license. By accessing and using our data and code, you agree to follow the terms of access specified <a href="https://creativecommons.org/licenses/by/4.0/legalcode.en">here</a>.
+            </p>
+        </section>
 
         <!-- <section id="key">
             <h2 id="key">Key Findings</h2>
